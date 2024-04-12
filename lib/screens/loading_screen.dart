@@ -1,3 +1,4 @@
+import 'package:clima_weather_app/services/networking.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
@@ -14,59 +15,32 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  late double latitude;
+  late double longitude;
+
   @override
   void initState() {
-    getLocation();
+    getLocationData();
     super.initState();
-    getData();
   }
 
-  void getLocation() async {
+  void getLocationData() async {
     LocationPermission permission = await Geolocator.requestPermission();
     LocationPermission permission2 = await Geolocator.checkPermission();
 
     Location location = Location();
     await location.getCurrentLocation();
-    print(location.latitude);
-    print(location.longitude);
-  }
+    latitude = location.latitude;
+    longitude = location.longitude;
 
-// https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid={API key}
-  void getData() async {
-    Uri url = Uri.https('api.openweathermap.org', '/data/2.5/weather', {
-      "lat": "44.34",
-      "lon": "10.99",
-      "appid": "785bbc38e5ecd1a4507f8df8b366755e"
-    });
-    http.Response response = await http.get(url);
-    if (response.statusCode == 200) {
-      String data = response.body;
+    NetworkHelper networkHelper = NetworkHelper(
+        "https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey");
 
-      var decodedData = jsonDecode(data);
-
-      double temperature = decodedData["main"]["temp"];
-      int condition = decodedData["weather"][0]["id"];
-      String cityName = decodedData(data)["name"];
-
-      print(temperature);
-      print(condition);
-      print(cityName);
-    } else {
-      print(response.statusCode);
-    }
+    var weatherData = await networkHelper.getData();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            getLocation();
-          },
-          child: const Text('Get Location'),
-        ),
-      ),
-    );
+    return const Scaffold();
   }
 }
