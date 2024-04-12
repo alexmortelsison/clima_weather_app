@@ -1,4 +1,5 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Location {
   late double longitude;

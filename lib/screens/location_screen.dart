@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import '../utilities/constants.dart';
 
 class LocationScreen extends StatefulWidget {
-  const LocationScreen({super.key});
+  const LocationScreen({super.key, required this.locationWeather});
+
+  final locationWeather;
 
   @override
   _LocationScreenState createState() => _LocationScreenState();

@@ -5,6 +5,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import '../location.dart';
 import 'dart:convert';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 const apiKey = "785bbc38e5ecd1a4507f8df8b366755e";
@@ -41,7 +42,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     var weatherData = await networkHelper.getData();
 
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return const LocationScreen();
+      return LocationScreen(locationWeather: weatherData);
     }));
   }
 
