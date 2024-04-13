@@ -27,7 +27,9 @@ class _CityScreenState extends State<CityScreen> {
               Align(
                 alignment: Alignment.topLeft,
                 child: OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: const Icon(
                     Icons.arrow_back_ios,
                     size: 50.0,
@@ -36,7 +38,13 @@ class _CityScreenState extends State<CityScreen> {
               ),
               Container(
                 padding: const EdgeInsets.all(20.0),
-                child: null,
+                child: TextField(
+                  style: const TextStyle(color: Colors.black),
+                  decoration: kTextFieldInputDecoration,
+                  onChanged: (value) {
+                    print(value);
+                  },
+                ),
               ),
               ElevatedButton(
                 onPressed: () {},
