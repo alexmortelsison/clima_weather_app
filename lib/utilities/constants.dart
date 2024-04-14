@@ -10,7 +10,7 @@ var kMessageTextStyle =
     GoogleFonts.kanit(fontSize: 60.0, fontWeight: FontWeight.w900);
 
 const kButtonTextStyle = TextStyle(
-  fontSize: 30.0,
+  fontSize: 29.0,
   fontFamily: 'Spartan MB',
 );
 
